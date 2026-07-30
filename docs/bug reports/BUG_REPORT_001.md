@@ -32,9 +32,10 @@ The item is successfully added to the cart, but it is not removed successfully, 
 
 ---
 
-### Video Recording (Optional)
+### Video Recording
 
 _Below is a short recording demonstrating the issue:_
+
 [evidenceBug1.webm](https://github.com/user-attachments/assets/d340f01e-2ad8-4ea2-b1c7-a562b141e189)
 
 ---
