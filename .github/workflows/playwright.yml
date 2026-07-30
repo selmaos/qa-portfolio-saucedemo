@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: npm ci
@@ -27,7 +27,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Execute Playwright Tests
-        run: npx playwright test --project=chromium --project=firefox --project=webkit
+        run: npx playwright test --project=chromium --project=firefox --project=webkit --reporter=html
         continue-on-error: true
 
       - name: Save Test Report
