@@ -32,7 +32,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Execute Playwright Tests
-        run: npx playwright test --project=chromium --project=firefox --project=webkit
+        run: npx playwright test --project=chromium --project=firefox --project=webkit --reporter=html
         continue-on-error: true
 
       - name: Upload HTML Report Artifact
