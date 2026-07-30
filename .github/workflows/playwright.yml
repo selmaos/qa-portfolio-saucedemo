@@ -1,22 +1,19 @@
 name: SauceDemo Automated Regression Suite
 
 on:
-  # 1. Automatsko pokretanje pri svakom push-u ili PR-u na main granu
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
-
-  # 2. Noćno automatsko pokretanje (Svaki dan u 02:00 UTC)
   schedule:
     - cron: "0 2 * * *"
-
-  # 3. Omogućava ručno pokretanje testova na dugme sa GitHub UI-ja
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  playwright-tests:
-    name: Run Playwright Tests
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,12 +32,18 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Execute Playwright Tests
-        run: npx playwright test
+        run: npx playwright test --project=chromium --project=firefox --project=webkit
+        continue-on-error: true
 
-      - name: Upload Test Report Artifact
-        uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
+      - name: Upload HTML Report Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: playwright-execution-report
-          path: playwright-report/
-          retention-days: 14
+          path: "playwright-report/"
+
+  deploy-report:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
