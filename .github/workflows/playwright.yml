@@ -34,7 +34,6 @@ jobs:
       - name: Execute Playwright Tests
         run: npx playwright test --project=chromium --project=firefox --project=webkit
         env:
-        PLAYWRIGHT_HTML_REPORT: playwright-report
         continue-on-error: true
 
       - name: Upload HTML Report Artifact
