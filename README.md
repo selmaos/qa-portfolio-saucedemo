@@ -10,7 +10,8 @@ All manual documentation is organized inside the `docs/` folder:
 
 - 📋 **[Test Plan](docs/TEST_PLAN.md)** — Testing strategy, scope, environment, and risk assessment.
 - 🧪 **[Test Cases (Google Sheets)](docs/TEST_CASES.md)** — Complete functional test suite matrix.
-  **[Live Interactive HTML Report](https://selmaos.github.io/qa-portfolio-saucedemo/)**– Auto-generated Playwright execution report hosted on GitHub Pages.
+- 📝 **[Live Interactive HTML Report](https://selmaos.github.io/qa-portfolio-saucedemo/)**– Auto-generated Playwright execution report hosted on GitHub Pages.
+- 🐛 **[Bug Reports](docs/bugReports)** — Documented defect reports with logs and screenshot/video evidence.
 
 ---
 
@@ -21,6 +22,7 @@ Automated test scripts are currently being built using **Playwright**:
 - [x] **Authentication:** Login functionality (valid & edge cases).
 - [x] **Inventory:** Basic UI and product sorting checks.
 - [ ] **Shopping Cart & Checkout:** _(In Progress)_
+- [ ] **End-to-End (E2E) Flow:** _(In progress)_
 
 ---
 
