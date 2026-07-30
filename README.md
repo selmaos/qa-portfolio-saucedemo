@@ -10,6 +10,7 @@ All manual documentation is organized inside the `docs/` folder:
 
 - 📋 **[Test Plan](docs/TEST_PLAN.md)** — Testing strategy, scope, environment, and risk assessment.
 - 🧪 **[Test Cases (Google Sheets)](docs/TEST_CASES.md)** — Complete functional test suite matrix.
+  **[Live Interactive HTML Report](https://selmaos.github.io/qa-portfolio-saucedemo/)**– Auto-generated Playwright execution report hosted on GitHub Pages.
 
 ---
 
