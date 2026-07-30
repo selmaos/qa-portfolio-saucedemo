@@ -7,11 +7,6 @@ on:
     - cron: "0 2 * * *"
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -35,15 +30,10 @@ jobs:
         run: npx playwright test --project=chromium --project=firefox --project=webkit
         continue-on-error: true
 
-      - name: Upload HTML Report Artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Save Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          path: "playwright-report/"
-
-  deploy-report:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          name: playwright-execution-report
+          path: playwright-report/
+          retention-days: 30
