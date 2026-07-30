@@ -1,4 +1,6 @@
-class InventoryPage {
+import { USERS, URLS } from "../data/testData";
+
+export class InventoryPage {
   constructor(page) {
     this.productSort = page.locator('[data-test="product-sort-container"]');
     this.sortedProducts = page.locator('[data-test="inventory-item-name"]');
@@ -18,5 +20,3 @@ class InventoryPage {
     return this.sortedProductPrice.first();
   }
 }
-
-module.exports = { InventoryPage };

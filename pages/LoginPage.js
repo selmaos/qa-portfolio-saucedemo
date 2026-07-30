@@ -1,4 +1,6 @@
-class LoginPage {
+import { USERS, URLS } from "../data/testData";
+
+export class LoginPage {
   constructor(page) {
     this.page = page;
     this.usernameInput = page.locator('[data-test="username"]');
@@ -11,7 +13,7 @@ class LoginPage {
   }
 
   async navigate() {
-    await this.page.goto("https://www.saucedemo.com/");
+    await this.page.goto(URLS.LOGIN_PAGE);
   }
   async login(username, password) {
     await this.usernameInput.fill(username);
@@ -19,5 +21,3 @@ class LoginPage {
     await this.loginButton.click();
   }
 }
-
-module.exports = { LoginPage };

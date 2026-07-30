@@ -1,13 +1,14 @@
-const { test, expect } = require("@playwright/test");
-const { LoginPage } = require("../pages/LoginPage");
-const { InventoryPage } = require("../pages/InventoryPage");
+import { test, expect } from "@playwright/test";
+import { LoginPage } from "../pages/LoginPage";
+import { InventoryPage } from "../pages/InventoryPage";
+import { USERS, URLS } from "../data/testData";
 
 test.describe("Sauce Demo Inventory and Catalog Test Suite", () => {
   test("TC-IC-001: Sort products by name (Z to A)", async ({ page }) => {
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);
     await loginPage.navigate();
-    await loginPage.login("standard_user", "secret_sauce");
+    await loginPage.login(USERS.STANDARD, USERS.PASSWORD);
     await inventoryPage.sort("za");
     await expect(inventoryPage.firstProduct).toHaveText(
       "Test.allTheThings() T-Shirt (Red)",
@@ -17,7 +18,7 @@ test.describe("Sauce Demo Inventory and Catalog Test Suite", () => {
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);
     await loginPage.navigate();
-    await loginPage.login("standard_user", "secret_sauce");
+    await loginPage.login(USERS.STANDARD, USERS.PASSWORD);
     await inventoryPage.sort("az");
     await expect(inventoryPage.firstProduct).toHaveText("Sauce Labs Backpack");
   });
@@ -25,7 +26,7 @@ test.describe("Sauce Demo Inventory and Catalog Test Suite", () => {
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);
     await loginPage.navigate();
-    await loginPage.login("standard_user", "secret_sauce");
+    await loginPage.login(USERS.STANDARD, USERS.PASSWORD);
     await inventoryPage.sort("lohi");
     await expect(inventoryPage.sortedProduct).toContainText("$7.99");
   });
@@ -33,7 +34,7 @@ test.describe("Sauce Demo Inventory and Catalog Test Suite", () => {
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);
     await loginPage.navigate();
-    await loginPage.login("standard_user", "secret_sauce");
+    await loginPage.login(USERS.STANDARD, USERS.PASSWORD);
     await inventoryPage.sort("hilo");
     await expect(inventoryPage.sortedProduct).toContainText("$49.99");
   });

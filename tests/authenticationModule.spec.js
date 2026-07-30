@@ -1,11 +1,12 @@
-const { test, expect } = require("@playwright/test");
-const { LoginPage } = require("../pages/LoginPage");
+import { test, expect } from "@playwright/test";
+import { LoginPage } from "../pages/LoginPage";
+import { USERS, URLS } from "../data/testData";
 
 test.describe("SauceDemo Login Test Suite", () => {
   test("TC-AM-001: Login with valid credentials", async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigate();
-    await loginPage.login("standard_user", "secret_sauce");
+    await loginPage.login(USERS.STANDARD, USERS.PASSWORD);
     await expect(loginPage.pageTitle).toHaveText("Products");
   });
   test("TC-AM-002: Login with empty Username and Password fields", async ({
@@ -23,7 +24,7 @@ test.describe("SauceDemo Login Test Suite", () => {
   }) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigate();
-    await loginPage.login("", "secret_sauce");
+    await loginPage.login("", USERS.PASSWORD);
     await expect(loginPage.errorMessage).toContainText(
       "Epic sadface: Username is required",
     );
@@ -33,7 +34,7 @@ test.describe("SauceDemo Login Test Suite", () => {
   }) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigate();
-    await loginPage.login("standard_user", "");
+    await loginPage.login(USERS.STANDARD, "");
     await expect(loginPage.errorMessage).toContainText(
       "Epic sadface: Password is required",
     );
@@ -51,7 +52,7 @@ test.describe("SauceDemo Login Test Suite", () => {
   }) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigate();
-    await loginPage.login("randomUser", "secret_sauce");
+    await loginPage.login("randomUser", USERS.PASSWORD);
     await expect(loginPage.errorMessage).toContainText(
       "Epic sadface: Username and password do not match any user in this service",
     );
@@ -61,7 +62,7 @@ test.describe("SauceDemo Login Test Suite", () => {
   }) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigate();
-    await loginPage.login("standard_user", "randomPassword");
+    await loginPage.login(USERS.STANDARD, "randomPassword");
     await expect(loginPage.errorMessage).toContainText(
       "Epic sadface: Username and password do not match any user in this service",
     );
