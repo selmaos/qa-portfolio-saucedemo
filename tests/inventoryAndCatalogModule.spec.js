@@ -38,4 +38,41 @@ test.describe("Sauce Demo Inventory and Catalog Test Suite", () => {
     await inventoryPage.sort("hilo");
     await expect(inventoryPage.sortedProduct).toContainText("$49.99");
   });
+  test("TC-IC-005: Add item to cart and verify cart badge counter", async ({
+    page,
+  }) => {
+    const loginPage = new LoginPage(page);
+    const inventoryPage = new InventoryPage(page);
+    await loginPage.navigate();
+    await loginPage.login(USERS.STANDARD, USERS.PASSWORD);
+    const addBtn = page.locator(
+      '[data-test="add-to-cart-sauce-labs-backpack"]',
+    );
+    await addBtn.click();
+    const badge = page.locator('[data-test="shopping-cart-badge"]');
+    await expect(badge).toContainText("1");
+    const removeBtn = page.locator('[data-test="remove-sauce-labs-backpack"]');
+    await expect(removeBtn).toBeVisible();
+    await expect(removeBtn).toContainText("Remove");
+  });
+
+  test("TC-IC-006: Remove item from cart on inventory page", async ({
+    page,
+  }) => {
+    const loginPage = new LoginPage(page);
+    const inventoryPage = new InventoryPage(page);
+    await loginPage.navigate();
+    await loginPage.login(USERS.STANDARD, USERS.PASSWORD);
+    const addBtn = page.locator(
+      '[data-test="add-to-cart-sauce-labs-backpack"]',
+    );
+    await addBtn.click();
+    const badge = page.locator('[data-test="shopping-cart-badge"]');
+    await expect(badge).toContainText("1");
+    const removeBtn = page.locator('[data-test="remove-sauce-labs-backpack"]');
+    await removeBtn.click();
+    await expect(badge).toBeHidden();
+    await expect(addBtn).toBeVisible();
+    await expect(addBtn).toContainText("Add to cart");
+  });
 });
